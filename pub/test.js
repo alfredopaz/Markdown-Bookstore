@@ -1,15 +1,15 @@
 function recitar(markupText){
-  const markupText = document.querySelector('#markupText')
   const url = 'http://localhost:3000/'
-  http = fetch(url, {
+  const data = { text: markupText}
+  console.log(data)
+  const request = {
     method: 'POST',
     headers: {
-      'Content-type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      text: markupText
-    })
-  })
+    body: JSON.stringify(data),
+  }
+  http = fetch(url, request)
   http.then(
     response => response.json()
   ).then(
@@ -20,7 +20,7 @@ function recitar(markupText){
 }
 document.addEventListener('DOMContentLoaded', function(){
   const text = document.querySelector('#markupText')
-  document.querySelector('#form1').onsubmit = () => {
+  document.querySelector('#markupForm').onsubmit = () => {
     recitar(text.value)
     return false;
   }
